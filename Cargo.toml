@@ -1,0 +1,14 @@
+[package]
+name = "rust-utils"
+version = "0.1.0"
+authors = ["Alexander Curtiss <apccurtiss@gmail.com>", "Izaak Weiss <izaak.weiss@gmail.com>"]
+
+[lib]
+name="ad_lib"
+path="src/lib.rs"
+
+[[bin]]
+name="trash_bin"
+path="src/bin.rs"
+
+[dependencies]

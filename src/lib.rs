@@ -10,20 +10,20 @@ struct VectorWrapper<A> {
     vector: Vec<A>
 }
 
-struct Concatinated<'a, 'b, A: 'b + 'a> {
+struct Concatenated<'a, 'b, A: 'b + 'a> {
     left: &'a ListThingy<A>,
     right: &'b ListThingy<A>
 }
 
 trait ListThingy<A> {
-    fn concat<'a, 'b>(&'a self, v: &'b ListThingy<A>) -> Concatinated<'a, 'b, A>;
+    fn concat<'a, 'b>(&'a self, v: &'b ListThingy<A>) -> Concatenated<'a, 'b, A>;
     fn index(&self, i: usize) -> &A;
     fn length(&self) -> usize;
 }
 
 impl<A> ListThingy<A> for VectorWrapper<A> {
-    fn concat<'a, 'b>(&'a self, v: &'b ListThingy<A>) -> Concatinated<'a, 'b, A> {
-        Concatinated {
+    fn concat<'a, 'b>(&'a self, v: &'b ListThingy<A>) -> Concatenated<'a, 'b, A> {
+        Concatenated {
             left: self,
             right: v,
         }
@@ -36,9 +36,9 @@ impl<A> ListThingy<A> for VectorWrapper<A> {
     }
 }
 
-impl<'i, 'j, A> ListThingy<A> for Concatinated<'i, 'j, A> {
-    fn concat<'a, 'b>(&'a self, v: &'b ListThingy<A>) -> Concatinated<'a, 'b, A> {
-        Concatinated {
+impl<'i, 'j, A> ListThingy<A> for Concatenated<'i, 'j, A> {
+    fn concat<'a, 'b>(&'a self, v: &'b ListThingy<A>) -> Concatenated<'a, 'b, A> {
+        Concatenated {
             left: self,
             right: v,
         }
@@ -57,8 +57,8 @@ impl<'i, 'j, A> ListThingy<A> for Concatinated<'i, 'j, A> {
 }
 
 // impl<'a, 'b: 'a, A> ListThingy<'a, 'b, A> for VectorWrapper<A> {
-//     fn concat(&self, v: &'b ListThingy<'a, 'b, A>) -> Concatinated<A> {
-//         Concatinated {
+//     fn concat(&self, v: &'b ListThingy<'a, 'b, A>) -> Concatenated<A> {
+//         Concatenated {
 //             left: self,
 //             right: v,
 //         }

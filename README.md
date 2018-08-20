@@ -1,2 +1,2 @@
 # rust-utils
-Some useful libraries for rust
+A simple persistent vector implementation. 
